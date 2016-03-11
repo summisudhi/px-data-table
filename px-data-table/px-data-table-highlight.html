@@ -1,0 +1,84 @@
+<!--
+    Relative paths assume component is being run from inside an app or another component, where dependencies are flat
+    siblings. When this component is run from its own repo (e.g. ui tests, examples), we assume the server is started with
+    'grunt depserve' (or similar server setup) to enable correct finding of bower dependencies for local runs.
+-->
+<link rel="import" href="../polymer/polymer.html" />
+
+
+<!--
+Element to define and configure highlighting behaviour for a given column (and hence cell or row).
+
+##### Usage
+
+  <px-data-table-highlight type-"row" method="isDave" import="px-data-table-highlight-example.html"></px-data-table-highlight>
+
+
+@element px-data-table-highlight
+@blurb Element providing solution to no problem in particular.
+@homepage index.html
+@demo demo.html
+-->
+<dom-module id="px-data-table-highlight">
+  <template>
+    <content></content>
+  </template>
+</dom-module>
+
+<script>
+  Polymer({
+    is: 'px-data-table-highlight',
+
+    /**
+     * Properties block, expose attribute values to the DOM via 'reflect'
+     *
+     * @property properties
+     * @type Object
+     */
+    properties: {
+      import: {
+        type: String,
+        value: ''
+      },
+      highlight: {
+        type: Object,
+        value: function(){
+          return {};
+        }
+      },
+      highlightMethod: {
+        type: String,
+        value: ''
+      },
+      highlightColor: {
+        type: String,
+        value: 'green'
+      },
+      highlightOpacity: {
+        type: Number,
+        value: 0.6
+      },
+      highlightType: {
+        type: String,
+        value: 'cell'
+      }
+    },
+
+    /**
+     * Loads the imported highlight function.
+     *
+     * @method ready
+     */
+    ready: function() {
+      this.importHref(this.import, function(e) {
+        if (this.highlightMethod && window.PxHighlight[this.highlightMethod]){
+          this.highlight = window.PxHighlight[this.highlightMethod];
+          this.fire('px-data-table-highlight-loaded');
+        }
+      }, function(e) {
+        // loading error
+      });
+    }
+
+  });
+</script>
