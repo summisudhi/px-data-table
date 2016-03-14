@@ -6,11 +6,8 @@ module.exports = {
         },
         sauce: {
              "disabled" : false,
-             "browsers": [{
-          "browserName": "microsoftedge",
-          "platform": "Windows 10",
-          "version": ""
-        }, {
+             "browsers": [
+           {
           "browserName": "internet explorer",
           "platform": "Windows 8.1",
           "version": "11"
@@ -22,7 +19,7 @@ module.exports = {
         }
       ]
              
-            
+            tw 
             
             
         }
