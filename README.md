@@ -394,3 +394,7 @@ $ grunt devmode
 ## Known Issues
 
 Please use [Github Issues](https://github.com/PredixDev/COMPONENT/issues) to submit any bugs you might find.
+
+
+
+#Adding new line to confirm travis integration
