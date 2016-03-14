@@ -9,7 +9,7 @@ before_script:
 - export PATH=$PWD/node_modules/.bin:$PATH
 - bower install
 script:
-- xvfb-run wct --skip-plugin sauce
+- xvfb-run wct --skip-plugin local
 env:
   global:
   - secure: fkUqpWJ8mvjwfsOBtyFKp88GDbOP6MYoguQE3UZ7+MGpE8GWVduEq+cTofMXtmJan61cvjWPuTe45Mxw8oojVEdeBSWpMqxIvJWFw2MVLgQe2bD9Np0HxcfQbl+kN+k6DenYLzoqpc0kdDDxPGsIvrfQENflnVxeFNKTBRVHNNPV34Gwy/9RX2DQjUHoGYN3NjP63eoBcxMXOildVG9W6foOheCNCWUFlIE4xCi3csSs7bSkeJdY0rVqzZNLtNSdYas411v++7K0sJgvT+/L5u1e57SOfBjNIaCXAM+hUclICPnwxSjul9ll7EHJ/dtZlkHWgZCcRWLUbImxPr3PvkWstTaIvORUTts3lrIpdhqhJPcNkeSLjdK0NBKRbZCRhMEOdsUb+f4fRhsFfwNFYL5jCZE1LGCXGQEB+6xDp1OySpTMz0R90XxXXPHbCrE6W4o7EUzijyQmV3hGg+FWlAovvVaZx5f7yQJ/CatnDzaAjFc1YJF3ufn3Stb9GvuzEeqNq6Vv80CH61ZnQZvD4O0t47mhvhwLz4aNUUR+I8desmdg/DKbdtyqqGGZVqQyzX6lp5/B5x60RNBmMgatPk8P9fjsZy0BN3rMSfaxlzwPWy1QgYl8cPMkLPiWojQRm4bMMX6szaE5uzOZ1E4/NEAHa1bQ+ZkwlHXnrJeuyDs=
