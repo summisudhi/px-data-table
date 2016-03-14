@@ -394,3 +394,5 @@ $ grunt devmode
 ## Known Issues
 
 Please use [Github Issues](https://github.com/PredixDev/COMPONENT/issues) to submit any bugs you might find.
+
+#Adding a line to see this repo is integrated in travis ci
