@@ -67,10 +67,12 @@ module.exports = {
           "version": "9"
         },
         {
-          "browserName": "safari",
-          "platform": "iOS",
-          "version": "9.2"
+          "browserName": "iphone",
+          "platform": "OS X 10.10",
+          "version": "9.2",
+          "deviceName": "iPad Air"
         }
+        
         
       ]
              
