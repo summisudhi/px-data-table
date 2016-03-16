@@ -13,7 +13,7 @@ module.exports = {
           "version": "10"
         },
          {
-          "browserName": "edge",
+          "browserName": "microsoftedge",
           "platform": "Windows 10"
          
         },
