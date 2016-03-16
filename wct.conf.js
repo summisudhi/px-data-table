@@ -67,8 +67,8 @@ module.exports = {
           "version": "9"
         },
         {
-          "browserName": "ipad simulator",
-          "platform": "ios",
+          "browserName": "safari",
+          "platform": "iOS",
           "version": "9.2"
         }
         
