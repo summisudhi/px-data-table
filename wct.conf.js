@@ -5,12 +5,17 @@ module.exports = {
             browsers: ['chrome', 'firefox']
         },
         sauce: {
-             "disabled" : false,
+             "disabled" : true,
              "browsers": [
              {
           "browserName": "internet explorer",
           "platform": "Windows 7",
           "version": "10"
+        },
+         {
+          "browserName": "edge",
+          "platform": "Windows 10",
+          "version": "13"
         },
         {
           "browserName": "internet explorer",
