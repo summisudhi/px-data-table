@@ -14,8 +14,8 @@ module.exports = {
         },
          {
           "browserName": "edge",
-          "platform": "Windows 10",
-          "version": "edge"
+          "platform": "Windows 10"
+         
         },
         {
           "browserName": "internet explorer",
