@@ -35,7 +35,7 @@ module.exports = {
         {
           "browserName": "internet explorer",
           "platform": "Windows 8",
-          "version": "11"
+          "version": "10"
         },
          {
           "browserName": "firefox",
@@ -65,7 +65,13 @@ module.exports = {
           "browserName": "safari",
           "platform": "OS X 10.11",
           "version": "9"
+        },
+        {
+          "browserName": "ipad simulator",
+          "platform": "ios",
+          "version": "9.2"
         }
+        
       ]
              
            
