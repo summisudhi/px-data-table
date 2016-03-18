@@ -65,6 +65,24 @@ module.exports = {
           "browserName": "safari",
           "platform": "OS X 10.11",
           "version": "9"
+        },
+             
+         {
+          "browserName": "iphone",
+          "platform": "OS X 10.10",
+          "version": "9.2",
+          "deviceName": "iPad Retina",
+          "deviceOrientation": "portrait"
+          
+        },
+        
+        {
+          "browserName": "iphone",
+          "platform": "OS X 10.10",
+          "version": "9.2",
+          "deviceName": "iPad 2",
+          "deviceOrientation": "portrait"
+          
         }
         
         
