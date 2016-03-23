@@ -83,6 +83,15 @@ module.exports = {
           "deviceName": "iPad 2",
           "deviceOrientation": "portrait"
           
+        },
+        
+        {
+          "browserName": "iphone",
+          "platform": "OS X 10.10",
+          "version": "9.2",
+          "deviceName": "iPad 2",
+          "deviceOrientation": "portrait"
+          
         }
         
         
