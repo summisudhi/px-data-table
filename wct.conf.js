@@ -4,17 +4,6 @@ module.exports = {
     local: {
         browsers: ['chrome', 'firefox']
     },
-    sauce: {
-      disabled: true,
-      "browsers": [{
-          "browserName": "microsoftedge",
-          "platform": "Windows 10",
-          "version": ""
-        }, {
-          "browserName": "internet explorer",
-          "platform": "Windows 8.1",
-          "version": "11"
-        },
 
         sauce: {
              "disabled" : false,
