@@ -1,66 +1,78 @@
 module.exports = {
-    verbose: false,
-    plugins: {
-        local: {
-            browsers: ['chrome', 'firefox']
+  verbose: false,
+  plugins: {
+    local: {
+        browsers: ['chrome', 'firefox']
+    },
+    sauce: {
+      disabled: true,
+      "browsers": [{
+          "browserName": "microsoftedge",
+          "platform": "Windows 10",
+          "version": ""
+        }, {
+          "browserName": "internet explorer",
+          "platform": "Windows 8.1",
+          "version": "11"
         },
+
         sauce: {
              "disabled" : false,
              "browsers": [
-             // {
-//           "browserName": "internet explorer",
-//           "platform": "Windows 7",
-//           "version": "10"
-//         },
-//         {
-//           "browserName": "chrome",
-//           "platform": "Windows 10",
-//           "version": "44"
-//         },
-//          {
-//           "browserName": "microsoftedge",
-//           "platform": "Windows 10"
-//          
-//         },
-//         {
-//           "browserName": "internet explorer",
-//           "platform": "Windows 8.1",
-//           "version": "11"
-//         },
-//         {
-//           "browserName": "internet explorer",
-//           "platform": "Windows 10",
-//           "version": "11"
-//         },
-//         {
-//           "browserName": "internet explorer",
-//           "platform": "Windows 8",
-//           "version": "10"
-//         },
-//          {
-//           "browserName": "firefox",
-//           "platform": "Windows 8.1",
-//           "version": "44"
-//         },
-//          {
-//           "browserName": "chrome",
-//           "platform": "Windows 8.1",
-//           "version": "48"
-//         },
-//          {
-//           "browserName": "safari",
-//           "platform": "OS X 10.10",
-//           "version": "8"
-//         },
-//          
-//         
-//          {
-//           "browserName": "chrome",
-//           "platform": "OS X 10.11",
-//           "version": "48"
-//         },
-//              
-//            
+ {
+          "browserName": "internet explorer",
+          "platform": "Windows 7",
+          "version": "10"
+        },
+        {
+          "browserName": "chrome",
+          "platform": "Windows 10",
+          "version": "44"
+        },
+         {
+          "browserName": "microsoftedge",
+          "platform": "Windows 10"
+         
+        },
+        {
+          "browserName": "internet explorer",
+          "platform": "Windows 8.1",
+          "version": "11"
+        },
+        {
+          "browserName": "internet explorer",
+          "platform": "Windows 10",
+          "version": "11"
+        },
+        {
+          "browserName": "internet explorer",
+          "platform": "Windows 8",
+          "version": "10"
+        },
+         {
+          "browserName": "firefox",
+          "platform": "Windows 8.1",
+          "version": "44"
+        },
+         {
+          "browserName": "chrome",
+          "platform": "Windows 8.1",
+          "version": "48"
+        },
+         {
+          "browserName": "safari",
+          "platform": "OS X 10.10",
+          "version": "8"
+        },
+         
+        
+         {
+          "browserName": "chrome",
+          "platform": "OS X 10.11",
+          "version": "48"
+        },
+             
+           
 {
           "browserName": "safari",
           "platform": "OS X 10.11",
@@ -91,9 +103,12 @@ module.exports = {
            
             
             
-        }
-    },
-    suites: [
-      'test/px-data-table-fixture.html'
-    ]
+
+  
+    }
+  },
+  suites: [
+    'test/px-data-table-fixture.html',
+    'test/px-data-table-cell-fixture.html'
+  ]
 };

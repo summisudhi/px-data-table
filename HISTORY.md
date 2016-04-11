@@ -1,3 +1,41 @@
+v1.5.0
+=================
+* Fixes to correctly notify table-data attribute when changes happen to the table data and propagate them out of the component.
+* Fixes to make table react correctly when the underlying model (table-data) changes.
+* Fixes to dropdown width and to make the cell text (character) width consistent with other column definitions.
+* Sass fixes for shadow DOM.
+
+v1.4.0
+=================
+* Added css variable to support custom cell padding: --px-data-table-padding-top, --px-data-table-padding-bottom, --px-data-table-padding-left, --px-data-table-padding-right
+
+v1.3.1
+=================
+* Updated dropdown to latest version
+
+v1.3.0
+=================
+* Added Dropdown functionality
+
+v1.2.0
+=======
+* Initial support for cell and row highlighting. See demo.html for an example.
+* Support for 'high'/'medium'/'low' highlight styles on given cell or row.
+* Light DOM observation of addition and removal of px-data-table-columns elements. Table now dynamically reacts to these changes.
+* Remove 'x' from input elements on IE and Edge.
+* Fix for making highlight and selected rows consistent when filtering or ordering of columns.
+* Fixes for IE when using column and cell highlight.
+* More tests.
+
+
+v1.1.3
+=================
+* Move bower components to use registered component names.
+
+v1.1.2
+=================
+* Fix 1px border-collapse padding bug.
+
 v1.1.1
 =================
 * Updated README with preventing auto-synching your info.
