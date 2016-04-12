@@ -1,3 +1,11 @@
+v1.5.2
+=================
+* added a css variable for dropdown border.
+
+v1.5.1
+=================
+* fixed an issue with dropdown tooltips within data table
+
 v1.5.0
 =================
 * Fixes to correctly notify table-data attribute when changes happen to the table data and propagate them out of the component.
