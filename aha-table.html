@@ -18,6 +18,15 @@
   <link rel="import" type="css" href="css/aha-table.css"/>
   <template>
     <content id="columndefs"></content>
+
+    <template is="dom-if" if="{{showColumnChooser}}">
+      <div class="flex columnChooser">
+        <px-dropdown display-value="Show/Hide column">
+          <px-dropdown-content class="px-dropdown-content" checkbox-mode="true" max-cont-character-width="10" items='{{_columnOrder}}'>
+          </px-dropdown-content>
+        </px-dropdown>
+      </div>
+    </template>
     <div class="scroll-body">
 
       <div id="scrollBodyTableContainer" class$="{{_getTableClass(tableRows, tableColumns)}}">
@@ -193,9 +202,35 @@
         type: Boolean,
         value: false
       },
+      /**
+       * Property to set the visibility of the table column chooser (used
+       * to show and hide columns)
+       *
+       * @default false
+       */
+      showColumnChooser: {
+        type: Boolean,
+        value: false
+      },
       _internalData: {
         type: Array,
         value: function(){return [];}
+      },
+      /**
+       * Array holding the column names in their displayed order
+       *
+       */
+      _columnOrder: {
+        type: Array,
+        value: function() { return []; }
+      },
+      /**
+       * Array holding the currently hidden columns
+       *
+       */
+      _hiddenColumns: {
+        type: Array,
+        value: function () {return[];}
       },
       //scroll body html element
       scrollBody: {
@@ -209,7 +244,8 @@
     observers: [
       '_updateDisplayedRows(firstItemIndex)', // when the first item to display changes
       '_updateDisplayedRows(pageSize)', // when the size of the page changes
-      '_dataChanged(data.*)'
+      '_dataChanged(data.*)',
+      '_shownColumnChanged(_columnOrder.*)'
     ],
 
     ready: function() {
@@ -245,9 +281,9 @@
             var name = addedColumns[i]['name'] || '';
             addedColumns[i].label = name.charAt(0).toUpperCase() + name.slice(1);
           }
-          this.push('meta', addedColumns[i]);
-        }
 
+          this._addColumn(addedColumns[i]);
+        }
       }
 
       removedColumns.forEach(function(columnToRemove){
@@ -256,7 +292,137 @@
             this.splice('meta', idx, 1);
           }
         }.bind(this));
+
+        //make sure this is a genuine remove and not a hideColumn
+        //before we update our column order array
+        var isHidden = this._hiddenColumns.filter(function(savedItem) {
+            return savedItem.name == columnToRemove.name;
+        })[0];
+
+        if(!isHidden) {
+          //ok remove it
+          this._columnOrder.forEach(function(column, idx){
+            if (columnToRemove.name === column.name){
+              this.splice('_columnOrder', idx, 1);
+            }
+          }.bind(this));
+        }
+
       }.bind(this));
+    },
+
+    /**
+     *  Used for adding a px-data-column. If the column has been added before
+     *  try to reinsert it where it was
+     *
+     */
+    _addColumn: function(addedColumn) {
+
+      //has it been added before
+      var existsAlready = this._columnOrder.filter(function(item) {
+        return item.name === addedColumn.name;
+      })[0];
+
+      if(!existsAlready) {
+        //just push it to the end
+        this.push('_columnOrder', {name: addedColumn.name,  val: addedColumn.label, checked: 'true'});
+        this.push('meta', addedColumn);
+      }
+      else {
+        //used to be shown, insert it at the right point
+        //find out the insertion point in the sorted array
+        var insertAt = this.selectable ? 1 : 0,
+            currentColumnIndex = this.selectable ? 1 : 0,
+            currentColumns = this.meta,
+            hasVisibleColumns = (this.selectable && currentColumns.length>1) ||
+                                (!this.selectable && currentColumns.length>0)
+
+        if(hasVisibleColumns) {
+          //find out where we should reinsert it from the ordered list of columns
+          this._columnOrder.every(function(item, index) {
+
+              if(item.name === addedColumn.name) {
+                //found it
+                insertAt = currentColumnIndex;
+                //break
+                return false;
+              }
+
+              //is this column visible, otherwise ignore
+              if(currentColumnIndex < currentColumns.length && item.name === currentColumns[currentColumnIndex].name) {
+                currentColumnIndex++;
+              }
+              return true;
+          });
+        }
+
+        this.splice('meta', insertAt, 0, addedColumn);
+      }
+    },
+
+    _shownColumnChanged: function(dropdownItem) {
+
+      //watch for checked changed only
+      if(dropdownItem.path.indexOf('checked') !== -1) {
+
+        //parse index of item that has changed
+        var index = dropdownItem.path.match(/\.#(\d+)./)[1];
+        if(index) {
+          var columnName = dropdownItem.base[index].name,
+              checked = dropdownItem.value;
+
+          if(checked) {
+            this.showColumn(columnName);
+          }
+          else {
+            this.hideColumn(columnName);
+          }
+        }
+      }
+    },
+
+    /**
+     * Hide the column which name matches columnName
+     *
+     *
+     */
+    hideColumn: function(columnName) {
+
+      //find column within content
+      this.getContentChildren().forEach(function(column, index) {
+        if(column.name === columnName) {
+
+          //save appropriate info for when we want to show it again
+          var savedItem = {};
+          savedItem.parent = Polymer.dom(column).parentNode;
+          savedItem.column = column;
+          savedItem.name = columnName;
+
+          this.push('_hiddenColumns', savedItem);
+
+          //now actually hide it by removing it from the dom. Our observer will
+          //take care of the reset
+          Polymer.dom(savedItem.parent).removeChild(column);
+        }
+      }, this);
+
+    },
+
+    /**
+     * show the column which name matches columnName if it has been hidden
+     * previously
+     *
+     *
+     */
+    showColumn: function(columnName) {
+
+      this._hiddenColumns.forEach(function(savedItem, index) {
+        if(savedItem.name === columnName) {
+          //reappend item, observers will deal wih the rest
+          Polymer.dom(savedItem.parent).appendChild(savedItem.column);
+          this.splice('_hiddenColumns', index, 1);
+        }
+      }, this);
     },
 
     _selectedColumnExists: function(){
@@ -351,9 +517,11 @@
       }
       for(var prop in this.data[0]) {
         if(prop.indexOf('_') !== 0) {//skip internal field
-          meta.push(this._generateMetaForColumn(prop, "string", false, prop.charAt(0).toUpperCase() + prop.slice(1)));
+          var colInfo = this._generateMetaForColumn(prop, "string", false, prop.charAt(0).toUpperCase() + prop.slice(1));
+          meta.push(colInfo);
         }
       }
+
       return meta;
     },
 
