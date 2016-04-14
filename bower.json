@@ -10,8 +10,7 @@
     "Gruntfile.js",
     "sass",
     "bower_components",
-    "node_modules",
-    "test"
+    "node_modules"
   ],
   "dependencies": {
     "polymer": "~v1.2.3",
