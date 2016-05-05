@@ -6,7 +6,7 @@ module.exports = {
     },
 
         sauce: {
-             "disabled" : false,
+             "disabled" : true,
              "browsers": [
  {
           "browserName": "internet explorer",
