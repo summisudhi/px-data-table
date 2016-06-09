@@ -6,7 +6,7 @@ module.exports = {
     },
 
         sauce: {
-             "disabled" : false,
+           
               sauceUser: "davidfeig",
               sauceKey: "4df71105-4e1f-4fb3-b7f0-0ad04e19033f",
              "browsers": [
